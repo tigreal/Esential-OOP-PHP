@@ -11,7 +11,11 @@ class coche{
 
     public function __construct($modelo=null)
     {
-        $this->modelo=$modelo;
+        if($modelo){
+            $this->modelo=$modelo;
+
+        }
+        
     }
     
 
