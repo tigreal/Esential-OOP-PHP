@@ -1,5 +1,159 @@
 <?php
 
+// se manejara el concepto de abstaccion en OOP pero atravez de interfaces, las interfaces son el segundo nivel de abstraccion 
+// las interfaces son parecidas a las clases abstractas tambien tienen metodos abstractos y constantes que son muy utiles cuando se trabajo en equipo, para obligar a los programadores a escribir siertos metodos en las clases secuandarias o heredadas.
+// la gran diferencia entre interfaces y clases abstractas es que las interfaces solo pueden tener metodos publicos y no pueden tener variables
+// una interface se declara con la palabra interfa, y se utiliza en la clase secundario con la palabra implentes
+interface cocheInterface{
+    // solo tiene :
+    // metodos publicos
+    // costantes
+    // y NO pueden tener variables
+    // Tambien se puede heredar o implementar mas de una interface en las clases secundarias
+    // es una forma de hace multi herencia. o en otras palabras una clase secundaria puede heredar mas de una interface
+
+    // diferencias entre interfaces y clases abstractas
+
+                        // inteface            clase abstracta
+    // en el codigo     -metodos abstractos     -metodos abstactos
+                     // -constantes             -constantes
+                                            //  -metodos contcretos(metodos con cuerpo)
+                                            //  -variables concretas(propiedas o varialbes)
+    
+    //Scope(alcance)    -publico                -publico
+                                            //  -protegido
+                                            //  -privado
+                                            //  -etc
+
+    //Num Herencias     -una clase puede         unas clase solo puede heredar una clase abstracta
+    //                  heredar mas de una
+    //                  interface(multiherencia)
+
+
+    // implementamos dos metodos para que se implemente en las clases secundarias
+    public function setModelo($modelo);
+    public function getModelo();
+    
+    
+
+}
+interface VeiculoInterface{
+    public function setTieneRuedas($bool);
+    public function getRuedas();
+    
+    
+}
+class miniCar implements cocheInterface, VeiculoInterface{
+    private $modelo;
+    private $tineRueda;
+    public function setModelo($modelo)
+    {
+        $this->modelo=$modelo;
+
+    }
+    public function getModelo()
+    {
+        return $this->modelo;
+    }
+    public function setTieneRuedas($bool)
+    {
+        $this->tieneRueda=$bool;
+    }
+    public function getRuedas()
+    {
+        return $this->tieneRueda?"tiene rueda":"no tiene rueda";
+
+    }
+
+
+}
+$objeto12 = new miniCar();
+$objeto12->setModelo('toyota Minicar');
+echo "</br>".$objeto12->getModelo();
+$objeto12->setTieneRuedas(false);
+echo "</br>".$objeto12->getRuedas();
+
+
+abstract class carro{
+
+    // podemos usar las clases abstractas para forzar al programador a escribir o implementar siertos metodos
+
+    protected $tankVolume;
+
+    // las clases abstractas pueden tener metodos no abstractos y propiedades q no pueden ser abstractas
+    public function setTankVolume($tankVolume)
+    {
+        $this->tankVolume=$tankVolume;
+    }
+    // para crear objetos de las clases abstractas se deben crear clases secundarias, las cuales deben implentar el cuerpo de los metodos abstractos, se usa la palabra extends para usar las clases abstractas
+
+    // los metodos abstractos no tienen cuerpo por lo que no llevan parentecis y solo llevarian punto y coma al final
+    public abstract function CalNumMillasFullTank();
+    
+        
+    
+
+}
+class carrosa extends carro{
+
+    public function calNumMillasFullTank()
+    {
+        $mille=$this->tankVolume*30;
+        return $mille;
+    }
+}
+class carrosa4Caballos extends carro{
+    public function calNumMillasFullTank()
+    {
+        return $mille=$this->tankVolume*33;
+    }
+    public function getColor()
+    {
+        return "begie";
+        
+    }
+
+
+}
+$carro4ca= new carrosa4Caballos();
+$carro4ca->setTankVolume(10);
+echo "</br>".$carro4ca->calNumMillasFullTank();
+echo "</br>".$carro4ca->getColor();
+
+abstract class usurioAbstracto{
+    private $nombreUsuario;
+    public abstract function yourRole();
+    public function setNombreUsuario($nombre)
+    {
+        $this->nombreUsuario=$nombre;
+    }
+    public function getNombreUsuario()
+    {
+        return $this->nombreUsuario;
+    }
+    
+}
+class Admin1 extends usurioAbstracto{
+    public function yourRole()
+    {
+        return "</br> administrador";
+    }
+
+}
+class Visor extends usurioAbstracto{
+    public function yourRole()
+    {
+        return "</br> visor";
+    }
+
+}
+
+$objAdmin=new Admin1();
+$objAdmin->setNombreUsuario("osmar");
+echo "</br>".$objAdmin->getNombreUsuario();
+echo $objAdmin->yourRole();
+
+
 class usuarioMain{
     protected $nombre;
     public function setNombre($nombre)
@@ -108,16 +262,8 @@ class coche{
 
     public function __construct($modelo=null)
     {
-<<<<<<< HEAD
-        if($modelo){
-            $this->modelo=$modelo;
-
-        }
-        
-=======
         // el __construct es un metodo magico pero tambien hay constantes magicas que se declaran con dos guiones bajos antes y despues como : __CLASS__ (obtenemos el nombre de la clase)__LINE__(numero de linea donde usamos la costante magica)__FILE__(nombre o ruta del archivo condo utilizamos la contsante)__METHOD__(obtenemos el nombre del metodo en la que utiliza la contante)
         $this->modelo=$modelo;
->>>>>>> b95544d63855ee1aa6124482b5e9a78f8f46ea87
     }
     
 
