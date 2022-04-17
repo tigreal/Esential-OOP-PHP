@@ -1,5 +1,70 @@
 <?php
 
+
+interface Autor{
+    public function setAutorPrivilegios($array);
+    public function getAtutorPrivilegios();
+    
+}
+interface Editor{
+    public function setPrivilegiosEditor($array);
+    public function getPrivilegiosEditor();
+    
+    
+}
+class AutorEditor implements Autor,Editor{
+    protected $arrayAutor;
+    protected $arrayEditor;
+    public function setAutorPrivilegios($array)
+    {
+        $this->arrayAutor=array($array);
+    }
+    public function getAtutorPrivilegios()
+    {
+        return $this->arrayAutor;
+    }
+    public function setPrivilegiosEditor($array)
+    {
+        $this->arrayEditor=array($array);
+    }
+    public function getPrivilegiosEditor()
+    {
+        return $this->arrayEditor;
+    }
+
+}
+
+class user455 extends AutorEditor{
+
+    protected $nombreUsuario;
+
+    public function setNombre($nombre)
+    {
+        $this->nombreUsuario=$nombre;
+
+    }
+
+    public function getNombre()
+    {
+        return $this->nombreUsuario;
+    }
+
+
+}
+
+$user1 =new user455();
+$user1->setNombre('baltazar');
+$user1->setAutorPrivilegios("escribir texto","aniadir puntuacion");
+$user1->setPrivilegiosEditor("editar texto","editar puntuacon");
+$nombreUsuario=$user1->getNombre();
+$userPrivilegios=array_merge($user1->getPrivilegiosEditor(),$user1->getAtutorPrivilegios());
+echo "</br>el nombre de usuario ".$nombreUsuario." y tienen los siguientes privilegios";
+foreach($userPrivilegios as $privilegios){
+    echo "</br>{$privilegios}";
+}
+
+
+
 // se manejara el concepto de abstaccion en OOP pero atravez de interfaces, las interfaces son el segundo nivel de abstraccion 
 // las interfaces son parecidas a las clases abstractas tambien tienen metodos abstractos y constantes que son muy utiles cuando se trabajo en equipo, para obligar a los programadores a escribir siertos metodos en las clases secuandarias o heredadas.
 // la gran diferencia entre interfaces y clases abstractas es que las interfaces solo pueden tener metodos publicos y no pueden tener variables
