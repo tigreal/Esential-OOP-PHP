@@ -1,5 +1,49 @@
 <?php
 
+// polimorfismo indica que los metodos de diferentes clases que hagan cosas similares deben tener el mismo nombre, para poder usar el polimorfismo usamos clases abstractas o interfaces.
+
+interface forma{
+    public function calcularArea();
+    
+}
+class circulo implements forma{
+    private $radio;
+    public function __construct($radio)
+    {
+        $this->radio=$radio;
+    }
+    public function calcularArea()
+    {
+        return $this->radio * $this->radio * pi();
+    }
+
+}
+class rectangulo implements forma{
+
+    private $alto;
+    private $ancho;
+
+    public function __construct($ancho, $alto)
+    {
+        $this->alto=$alto;
+        $this->ancho=$ancho;
+    
+
+    }
+    public function calcularArea()
+    {
+        return $this->ancho * $this->alto;
+    }
+}
+
+$circulo =new circulo(4);
+$rectangulo=new rectangulo(4,5);
+
+echo "</br>".$circulo->calcularArea();
+echo "</br>".$rectangulo->calcularArea();
+
+
+
 
 interface Autor{
     public function setAutorPrivilegios($array);
@@ -60,6 +104,7 @@ $nombreUsuario=$user1->getNombre();
 $userPrivilegios=array_merge($user1->getPrivilegiosEditor(),$user1->getAtutorPrivilegios());
 echo "</br>el nombre de usuario ".$nombreUsuario." y tienen los siguientes privilegios";
 foreach($userPrivilegios as $privilegios){
+    // se coloca en corchetes cuando se encierra en comillas dobles pero es una barriable
     echo "</br>{$privilegios}";
 }
 
